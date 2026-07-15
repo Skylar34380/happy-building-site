@@ -36,10 +36,10 @@ export default function Admin() {
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Happy Building Co. home">
-          <span className="brand-mark">HB</span>
+        <a className="brand" href="/" aria-label="2Form Consulting Pty Ltd home">
+          <span className="brand-mark">2F</span>
           <span>
-            <strong>Happy Building</strong>
+            <strong>2Form Consulting</strong>
             <small>Staff</small>
           </span>
         </a>

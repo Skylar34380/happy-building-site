@@ -26,11 +26,11 @@ export default function SiteIntro() {
   }
 
   return (
-    <div className={`site-intro ${stage === "opening" ? "is-opening" : ""}`} aria-label="Happy Building loading">
+    <div className={`site-intro ${stage === "opening" ? "is-opening" : ""}`} aria-label="2Form Consulting loading">
       <div className="intro-panel intro-panel-left" />
       <div className="intro-panel intro-panel-right" />
       <div className="intro-content">
-        <p className="intro-kicker">Happy Building Co.</p>
+        <p className="intro-kicker">2Form Consulting Pty Ltd</p>
         <div className="intro-mark" aria-hidden="true">
           <span />
           <span />

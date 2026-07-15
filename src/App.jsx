@@ -9,7 +9,7 @@ const RoomPlanningScene = lazy(() => import("./components/RoomPlanningScene.jsx"
 
 const team = [
   {
-    name: "Rob",
+    name: "Robert",
     role: "Founder / Director",
     bio: "Leads the studio vision, client relationships, project direction, and the key decisions that shape each build."
   },
@@ -70,11 +70,11 @@ export default function App() {
     <>
       <SiteIntro />
       <header className="site-header">
-        <a className="brand" href="#home" aria-label="Happy Building Co. home">
-          <span className="brand-mark">HB</span>
+        <a className="brand" href="#home" aria-label="2Form Consulting Pty Ltd home">
+          <span className="brand-mark">2F</span>
           <span>
-            <strong>Happy Building</strong>
-            <small>Co.</small>
+            <strong>2Form Consulting</strong>
+            <small>Pty Ltd</small>
           </span>
         </a>
         <nav className="site-nav" aria-label="Main navigation">
@@ -119,7 +119,7 @@ export default function App() {
           </div>
           <div className="about-grid">
             <Reveal as="p">
-              Happy Building Co. is a fictional premium construction company serving residential and commercial clients.
+              2Form Consulting Pty Ltd is a premium construction and design consulting company serving residential and commercial clients.
               The studio works with owners, designers, consultants, and trades to turn early ideas into well-managed
               building programs.
             </Reveal>
@@ -198,7 +198,7 @@ export default function App() {
               <SplitText as="h2" text="From measured plan to spatial preview." />
             </div>
             <Reveal as="p" delay={180}>
-              A lightweight showcase for the way Happy Building Co. can present future rooms:
+              A lightweight showcase for the way 2Form Consulting Pty Ltd can present future rooms:
               start with a working plan, test the layout, then show the space as an easy-to-read interior preview.
             </Reveal>
           </div>
@@ -284,7 +284,7 @@ export default function App() {
             <dl>
               <div>
                 <dt>Email</dt>
-                <dd><a href="mailto:hello@happybuilding.example">hello@happybuilding.example</a></dd>
+                <dd><a href="mailto:hello@2formconsulting.example">hello@2formconsulting.example</a></dd>
               </div>
               <div>
                 <dt>Phone</dt>
@@ -296,7 +296,7 @@ export default function App() {
               </div>
             </dl>
           </div>
-          <form className="contact-form" action="mailto:hello@happybuilding.example" method="post" encType="text/plain">
+          <form className="contact-form" action="mailto:hello@2formconsulting.example" method="post" encType="text/plain">
             <label>
               Name
               <input name="name" autoComplete="name" required />
@@ -325,7 +325,7 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>Happy Building Co. React structure and placeholder content ready for replacement.</p>
+        <p>2Form Consulting Pty Ltd React structure and placeholder content ready for replacement.</p>
         <a href="/admin">Staff login</a>
       </footer>
     </>

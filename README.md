@@ -1,6 +1,6 @@
-# Premium Construction Company Website Starter
+# 2Form Consulting Pty Ltd Website Starter
 
-This is a React website starter for a premium construction company. The app is written in JavaScript/JSX with CSS, while projects are stored in `public/data/projects.json`.
+This is a React website starter for 2Form Consulting Pty Ltd. The app is written in JavaScript/JSX with CSS, while projects are stored in `public/data/projects.json`.
 
 ## Run locally
 
