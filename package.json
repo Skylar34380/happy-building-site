@@ -1,0 +1,20 @@
+{
+  "name": "happy-building-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.185.1",
+    "vite": "^7.0.0"
+  },
+  "scripts": {
+    "add-project": "node scripts/add-project.mjs",
+    "validate": "node scripts/validate-projects.mjs",
+    "dev": "vite --host 127.0.0.1 --port 8080",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 8080"
+  }
+}

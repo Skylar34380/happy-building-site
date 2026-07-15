@@ -1,0 +1,35 @@
+[
+  {
+    "id": "mornington-residence",
+    "title": "Mornington Residence",
+    "category": "Residential",
+    "location": "Mornington Peninsula, VIC",
+    "year": 2026,
+    "status": "Completed",
+    "service": "Working drawings",
+    "summary": "Architecturally detailed coastal home with concrete forms, timber soffits, planted terraces, and a carefully staged exterior works program.",
+    "image": ""
+  },
+  {
+    "id": "domain-apartment",
+    "title": "Domain Apartment",
+    "category": "Renovation",
+    "location": "South Yarra, VIC",
+    "year": 2025,
+    "status": "Completed",
+    "service": "Room planning",
+    "summary": "Warm stone and timber interior renovation delivered inside an occupied building with tight access, acoustic controls, and precision joinery.",
+    "image": ""
+  },
+  {
+    "id": "collins-lobby",
+    "title": "Collins Lobby",
+    "category": "Commercial",
+    "location": "Melbourne, VIC",
+    "year": 2025,
+    "status": "In progress",
+    "service": "Future project",
+    "summary": "Boutique commercial lobby fit-out with stone reception, timber paneling, feature lighting, and coordinated services integration.",
+    "image": ""
+  }
+]
