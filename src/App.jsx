@@ -71,7 +71,7 @@ export default function App() {
       <SiteIntro />
       <header className="site-header">
         <a className="brand" href="#home" aria-label="2Form Consulting Pty Ltd home">
-          <span className="brand-mark">2F</span>
+          <img className="brand-logo" src="/assets/2form-logo.jpg" alt="" />
           <span>
             <strong>2Form Consulting</strong>
             <small>Pty Ltd</small>

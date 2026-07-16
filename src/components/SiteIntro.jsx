@@ -31,12 +31,7 @@ export default function SiteIntro() {
       <div className="intro-panel intro-panel-right" />
       <div className="intro-content">
         <p className="intro-kicker">2Form Consulting Pty Ltd</p>
-        <div className="intro-mark" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
+        <img className="intro-logo" src="/assets/2form-logo.jpg" alt="" />
         <h1>Preparing the plan</h1>
         <div className="intro-progress" aria-hidden="true">
           <span />
