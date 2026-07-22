@@ -11,7 +11,6 @@ git clone https://github.com/Skylar34380/happy-building-site.git "$DEPLOY_ROOT"
 echo "Copying the current 2Form site without local secrets or uploaded media..."
 rsync -a --delete \
   --exclude='.git/' \
-  --exclude='.github/' \
   --exclude='.DS_Store' \
   --exclude='.env' \
   --exclude='.env.*' \

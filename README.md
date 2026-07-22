@@ -1,5 +1,7 @@
 # 2Form Consulting Pty Ltd Website Starter
 
+[![Azure Static Web Apps CI/CD](https://github.com/Skylar34380/happy-building-site/actions/workflows/azure-static-web-apps.yml/badge.svg)](https://github.com/Skylar34380/happy-building-site/actions/workflows/azure-static-web-apps.yml)
+
 This is a React website starter for 2Form Consulting Pty Ltd. The public site is written in React/JSX with CSS and Three.js. Production project updates are handled by Node.js API routes under `api/`, with project media and the project JSON database stored in Azure Blob Storage.
 
 ## Run locally
@@ -74,6 +76,23 @@ npm run secret
 
 This repository includes a GitHub Actions workflow at `.github/workflows/azure-static-web-apps.yml`.
 
+The workflow is designed as a small production pipeline:
+
+1. A pull request or push to `main` starts the workflow.
+2. `quality_checks` installs the exact versions from `package-lock.json` with `npm ci`.
+3. `npm run check` validates project JSON, syntax-checks every API entry point, and builds the React production bundle.
+4. Azure deployment runs only after all quality gates pass.
+5. Pull requests receive an isolated Azure preview environment. Closing the pull request removes that preview.
+6. Concurrency control cancels an older run when a newer commit is pushed to the same branch.
+
+The workflow uses read-only repository permissions plus pull-request write access required for preview deployment feedback. Production credentials remain in GitHub Secrets and are never committed.
+
+Run the same CI checks locally before opening a pull request:
+
+```bash
+npm run check
+```
+
 Create an Azure Static Web App connected to the GitHub repository and use:
 
 ```text
@@ -102,6 +121,27 @@ AZURE_PROJECTS_BLOB_NAME
 ```
 
 The GitHub token used to push this repository must include `workflow` scope because this project contains a `.github/workflows` file.
+
+### Team workflow
+
+Use short-lived feature branches instead of committing directly to `main`:
+
+```bash
+git switch -c feature/project-filters
+npm run check
+git add .
+git commit -m "Add portfolio project filters"
+git push -u origin feature/project-filters
+```
+
+Open a pull request and use the included checklist. GitHub Actions becomes the shared, repeatable reviewer: a change cannot reach Azure through this pipeline unless the data, API imports, and production build all pass.
+
+For a team repository, also enable these GitHub branch protection rules for `main`:
+
+- Require a pull request before merging.
+- Require the `Validate and build` status check.
+- Require branches to be up to date before merging.
+- Block force pushes and branch deletion.
 
 ## Local update fallback
 
