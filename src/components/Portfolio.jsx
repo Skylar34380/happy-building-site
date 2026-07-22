@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
 
-const filters = ["All", "Residential", "Commercial", "Renovation"];
-
 export default function Portfolio({ projects }) {
   const [activeFilter, setActiveFilter] = useState("All");
+  const filters = useMemo(
+    () => ["All", ...new Set(projects.map((project) => project.category).filter(Boolean))],
+    [projects]
+  );
 
   const visibleProjects = useMemo(() => {
     if (activeFilter === "All") {
@@ -37,7 +39,7 @@ export default function Portfolio({ projects }) {
       <div className="project-grid" aria-live="polite">
         {visibleProjects.map((project) => (
           <article className="project-card" key={project.id}>
-            <div className="project-image-placeholder" aria-label={`${project.title} image placeholder`} />
+            <ProjectGallery project={project} />
             <div className="project-body">
               <div className="project-meta">
                 <span>{project.category}</span>
@@ -52,5 +54,58 @@ export default function Portfolio({ projects }) {
         ))}
       </div>
     </section>
+  );
+}
+
+function ProjectGallery({ project }) {
+  const images = useMemo(() => {
+    const gallery = Array.isArray(project.gallery) ? project.gallery : [];
+    return [...new Set([project.image, ...gallery].filter(Boolean))];
+  }, [project.gallery, project.image]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeImage = images[activeIndex];
+
+  function showPrevious() {
+    setActiveIndex((current) => (current === 0 ? images.length - 1 : current - 1));
+  }
+
+  function showNext() {
+    setActiveIndex((current) => (current === images.length - 1 ? 0 : current + 1));
+  }
+
+  if (!activeImage) {
+    return (
+      <div className="project-image-placeholder" aria-label={`${project.title} image placeholder`}>
+        <span>Image pending</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-gallery">
+      <img src={activeImage} alt={`${project.title} project view ${activeIndex + 1}`} />
+      {images.length > 1 && (
+        <>
+          <button className="gallery-arrow gallery-arrow-prev" type="button" onClick={showPrevious} aria-label="Previous project image">
+            ‹
+          </button>
+          <button className="gallery-arrow gallery-arrow-next" type="button" onClick={showNext} aria-label="Next project image">
+            ›
+          </button>
+          <div className="gallery-dots" aria-label={`${project.title} image selector`}>
+            {images.map((image, index) => (
+              <button
+                className={index === activeIndex ? "gallery-dot active" : "gallery-dot"}
+                key={image}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Show image ${index + 1}`}
+                aria-pressed={index === activeIndex}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
