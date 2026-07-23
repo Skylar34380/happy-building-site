@@ -127,6 +127,7 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
     setIsSaving(true);
     setStatusType("success");
 
@@ -144,7 +145,7 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
       }
 
       const gallery = [...new Set(resolvedMedia.filter(Boolean))];
-      const formProject = buildProjectRecord(new FormData(event.currentTarget));
+      const formProject = buildProjectRecord(new FormData(form));
       const project = {
         ...formProject,
         id: editingId || formProject.id,
