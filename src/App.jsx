@@ -14,12 +14,12 @@ const team = [
     bio: "Leads the studio vision, client relationships, project direction, and the key decisions that shape each build."
   },
   {
-    name: "Enricko",
+    name: "Enrico",
     role: "Architect",
     bio: "Develops architectural concepts, spatial planning, design documentation, and buildable details for residential work."
   },
   {
-    name: "Joon",
+    name: "Joon Wei",
     role: "Architect",
     bio: "Focuses on planning, drawing coordination, material studies, and calm transitions from design intent to construction."
   },
@@ -59,6 +59,7 @@ const whatWeDo = [
 export default function App() {
   const [projects, setProjects] = useState([]);
   const [projectError, setProjectError] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     loadProjects()
@@ -77,7 +78,24 @@ export default function App() {
             <small>Pty Ltd</small>
           </span>
         </a>
-        <nav className="site-nav" aria-label="Main navigation">
+        <button
+          className={`menu-button${isMenuOpen ? " is-open" : ""}`}
+          type="button"
+          aria-controls="main-navigation"
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <nav
+          className={`site-nav${isMenuOpen ? " is-open" : ""}`}
+          id="main-navigation"
+          aria-label="Main navigation"
+          onClick={() => setIsMenuOpen(false)}
+        >
           <a href="#about">About</a>
           <a href="#team">Team</a>
           <a href="#portfolio">Portfolio</a>

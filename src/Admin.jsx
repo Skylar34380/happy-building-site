@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProjectAdmin from "./components/ProjectAdmin.jsx";
-import { loadProjects } from "./lib/projectStore.js";
+import { clearAdminToken, getAdminToken, loadProjects, loginAdmin } from "./lib/projectStore.js";
 
 const STAFF_USERNAME = "happy123";
 const STAFF_PASSWORD = "happy789";
@@ -8,8 +8,9 @@ const STAFF_PASSWORD = "happy789";
 export default function Admin() {
   const [projects, setProjects] = useState([]);
   const [projectError, setProjectError] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminToken, setAdminToken] = useState(() => getAdminToken());
   const [loginError, setLoginError] = useState("");
+  const isAuthenticated = Boolean(adminToken);
 
   useEffect(() => {
     loadProjects()
@@ -17,25 +18,38 @@ export default function Admin() {
       .catch((error) => setProjectError(error.message));
   }, []);
 
-  function handleLogin(event) {
+  async function handleLogin(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
     const password = formData.get("password");
 
-    if (username === STAFF_USERNAME && password === STAFF_PASSWORD) {
-      setIsAuthenticated(true);
+    try {
+      const token = await loginAdmin({ username, password });
+      setAdminToken(token);
       setLoginError("");
       event.currentTarget.reset();
       return;
-    }
+    } catch (error) {
+      if (import.meta.env.DEV && username === STAFF_USERNAME && password === STAFF_PASSWORD) {
+        setAdminToken("local-prototype-token");
+        setLoginError("");
+        event.currentTarget.reset();
+        return;
+      }
 
-    setLoginError("The username or password is incorrect.");
+      setLoginError(error.message);
+    }
+  }
+
+  function handleLogout() {
+    clearAdminToken();
+    setAdminToken("");
   }
 
   return (
     <>
-      <header className="site-header">
+      <header className="site-header admin-header">
         <a className="brand" href="/" aria-label="2Form Consulting Pty Ltd home">
           <img className="brand-logo" src="/assets/2form-logo.jpg" alt="" />
           <span>
@@ -45,6 +59,7 @@ export default function Admin() {
         </a>
         <nav className="site-nav" aria-label="Admin navigation">
           <a href="/">Public site</a>
+          {isAuthenticated && <button className="nav-button" type="button" onClick={handleLogout}>Log out</button>}
         </nav>
       </header>
 
@@ -72,7 +87,7 @@ export default function Admin() {
             <p>{projectError}</p>
           </section>
         ) : (
-          <ProjectAdmin projects={projects} onProjectsChange={setProjects} />
+          <ProjectAdmin adminToken={adminToken} projects={projects} onProjectsChange={setProjects} />
         )}
       </main>
     </>
