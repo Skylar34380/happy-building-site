@@ -20,7 +20,8 @@ export default function Admin() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const username = formData.get("username");
     const password = formData.get("password");
 
@@ -28,13 +29,13 @@ export default function Admin() {
       const token = await loginAdmin({ username, password });
       setAdminToken(token);
       setLoginError("");
-      event.currentTarget.reset();
+      form.reset();
       return;
     } catch (error) {
       if (import.meta.env.DEV && username === STAFF_USERNAME && password === STAFF_PASSWORD) {
         setAdminToken("local-prototype-token");
         setLoginError("");
-        event.currentTarget.reset();
+        form.reset();
         return;
       }
 

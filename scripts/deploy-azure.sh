@@ -18,6 +18,7 @@ rsync -a --delete \
   --exclude='dist/' \
   --exclude='outputs/' \
   --exclude='work/' \
+  --exclude='upload-fixes/' \
   --exclude='mycloud-project-covers/' \
   --exclude='mycloud-project-gallery/' \
   --exclude='assets/project-covers/' \

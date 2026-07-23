@@ -39,8 +39,9 @@ export function createToken(payload) {
 }
 
 export function requireAdmin(request) {
-  const header = request.headers.authorization || "";
-  const token = header.startsWith("Bearer ") ? header.slice("Bearer ".length) : "";
+  const customToken = readHeader(request.headers, "x-admin-token");
+  const authorization = readHeader(request.headers, "authorization");
+  const token = customToken || (authorization.startsWith("Bearer ") ? authorization.slice("Bearer ".length) : "");
 
   if (!token) {
     throw Object.assign(new Error("Missing admin token."), { statusCode: 401 });
@@ -60,6 +61,14 @@ export function requireAdmin(request) {
   }
 
   return payload;
+}
+
+function readHeader(headers, name) {
+  if (typeof headers?.get === "function") {
+    return headers.get(name) || "";
+  }
+
+  return headers?.[name] || "";
 }
 
 export function handleError(response, error) {

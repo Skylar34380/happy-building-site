@@ -132,6 +132,7 @@ function json(status, payload) {
 function toAuthRequest(request) {
   return {
     headers: {
+      "x-admin-token": request.headers.get("x-admin-token") || "",
       authorization: request.headers.get("authorization") || ""
     }
   };
