@@ -302,11 +302,11 @@ export default function App() {
             <dl>
               <div>
                 <dt>Email</dt>
-                <dd><a href="mailto:hello@2formconsulting.example">hello@2formconsulting.example</a></dd>
+                <dd><a href="mailto:info@2form.com.au">info@2form.com.au</a></dd>
               </div>
               <div>
                 <dt>Phone</dt>
-                <dd><a href="tel:+61000000000">+61 000 000 000</a></dd>
+                <dd><a href="tel:+61419585604">0419 585 604</a></dd>
               </div>
               <div>
                 <dt>Studio</dt>
@@ -314,7 +314,7 @@ export default function App() {
               </div>
             </dl>
           </div>
-          <form className="contact-form" action="mailto:hello@2formconsulting.example" method="post" encType="text/plain">
+          <form className="contact-form" action="mailto:info@2form.com.au" method="post" encType="text/plain">
             <label>
               Name
               <input name="name" autoComplete="name" required />
