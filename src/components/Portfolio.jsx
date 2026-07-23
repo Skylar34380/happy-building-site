@@ -48,7 +48,9 @@ export default function Portfolio({ projects }) {
                 <span>{project.year}</span>
               </div>
               <h3>{project.title}</h3>
-              <p>{project.summary}</p>
+              <p className="project-summary" tabIndex="0">
+                {project.summary}
+              </p>
               <strong>{project.location}</strong>
             </div>
           </article>

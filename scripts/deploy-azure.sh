@@ -4,6 +4,7 @@ set -euo pipefail
 
 SOURCE_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEPLOY_ROOT="$(mktemp -d /private/tmp/twoform-azure-deploy.XXXXXX)"
+BRANCH="${1:-site-update-$(date +%Y%m%d-%H%M%S)}"
 
 echo "Cloning GitHub repository..."
 git clone https://github.com/Skylar34380/happy-building-site.git "$DEPLOY_ROOT"
@@ -27,6 +28,7 @@ rsync -a --delete \
   "$SOURCE_ROOT/" "$DEPLOY_ROOT/"
 
 cd "$DEPLOY_ROOT"
+git switch -c "$BRANCH"
 git add -A
 
 if git diff --cached --quiet; then
@@ -34,7 +36,7 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-git commit -m "Deploy Azure site and admin workflow"
-git push origin main
+git commit -m "Update 2Form website"
+git push -u origin "$BRANCH"
 
-echo "Push complete. GitHub Actions will now deploy the site to Azure."
+echo "Push complete. Open a pull request from $BRANCH into main; Azure deploys after it is merged."
