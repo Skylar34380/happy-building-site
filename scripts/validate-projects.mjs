@@ -4,7 +4,6 @@ const dataPath = new URL("../public/data/projects.json", import.meta.url);
 const requiredFields = ["id", "title", "category", "location", "year", "status", "service", "summary", "image"];
 const allowedCategories = new Set(["Commercial", "Residential", "Renovation"]);
 const allowedStatuses = new Set(["Completed", "In progress", "Planning"]);
-const allowedServices = new Set(["Future project", "Room planning", "Working drawings"]);
 
 const projects = JSON.parse(await fs.readFile(dataPath, "utf8"));
 
@@ -16,7 +15,7 @@ const ids = new Set();
 
 for (const [index, project] of projects.entries()) {
   for (const field of requiredFields) {
-    if (project[field] === undefined || project[field] === "") {
+    if (project[field] === undefined || (field !== "image" && project[field] === "")) {
       throw new Error(`Project at index ${index} is missing "${field}".`);
     }
   }
@@ -34,16 +33,37 @@ for (const [index, project] of projects.entries()) {
     throw new Error(`Invalid status for ${project.id}: ${project.status}`);
   }
 
-  if (!allowedServices.has(project.service)) {
-    throw new Error(`Invalid service for ${project.id}: ${project.service}`);
-  }
-
   if (!Number.isInteger(project.year) || project.year < 1900 || project.year > 2100) {
     throw new Error(`Invalid year for ${project.id}: ${project.year}`);
   }
 
-  if (!project.image.startsWith("/assets/")) {
-    throw new Error(`Image for ${project.id} should live in /assets/.`);
+  if (project.image && !isAllowedImageSource(project.image)) {
+    throw new Error(`Image for ${project.id} should be a local /assets/ path or an Azure Blob URL.`);
+  }
+
+  if (project.gallery !== undefined) {
+    if (!Array.isArray(project.gallery)) {
+      throw new Error(`Gallery for ${project.id} should be an array.`);
+    }
+
+    for (const image of project.gallery) {
+      if (!isAllowedImageSource(image)) {
+        throw new Error(`Gallery image for ${project.id} should be a local /assets/ path or an Azure Blob URL.`);
+      }
+    }
+  }
+}
+
+function isAllowedImageSource(image) {
+  if (image.startsWith("/assets/")) {
+    return true;
+  }
+
+  try {
+    const url = new URL(image);
+    return url.protocol === "https:" && url.hostname.endsWith(".blob.core.windows.net");
+  } catch {
+    return false;
   }
 }
 

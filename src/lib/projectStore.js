@@ -53,7 +53,7 @@ export async function uploadProjectFile(file, token) {
   const signResponse = await fetch("/api/uploads/sign", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
+      "X-Admin-Token": token,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -88,7 +88,7 @@ export async function saveProject(project, token) {
   const response = await fetch(API_PROJECTS_URL, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
+      "X-Admin-Token": token,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(project)
@@ -105,7 +105,7 @@ export async function updateProject(projectId, project, token) {
   const response = await fetch(`${API_PROJECTS_URL}/${encodeURIComponent(projectId)}`, {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${token}`,
+      "X-Admin-Token": token,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(project)
@@ -122,7 +122,7 @@ export async function deleteProject(projectId, token) {
   const response = await fetch(`${API_PROJECTS_URL}/${encodeURIComponent(projectId)}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${token}`
+      "X-Admin-Token": token
     }
   });
 
