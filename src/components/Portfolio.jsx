@@ -44,6 +44,7 @@ export default function Portfolio({ projects }) {
               <div className="project-meta">
                 <span>{project.category}</span>
                 <span>{project.status}</span>
+                {project.area && <span>{project.area}</span>}
                 <span>{project.year}</span>
               </div>
               <h3>{project.title}</h3>

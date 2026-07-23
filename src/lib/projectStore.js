@@ -141,6 +141,7 @@ export function buildProjectRecord(formData) {
     title,
     category: formData.get("category"),
     location: String(formData.get("location") || "").trim(),
+    area: String(formData.get("area") || "").trim(),
     year: Number(formData.get("year")),
     status: formData.get("status"),
     summary: String(formData.get("summary") || "").trim(),

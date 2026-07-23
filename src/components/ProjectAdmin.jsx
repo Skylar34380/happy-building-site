@@ -15,6 +15,7 @@ const EMPTY_PROJECT = {
   category: "Residential",
   service: "",
   location: "",
+  area: "",
   year: new Date().getFullYear(),
   status: "Completed",
   summary: ""
@@ -61,6 +62,7 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
       category: project.category || "Residential",
       service: project.service || "",
       location: project.location || "",
+      area: project.area || "",
       year: project.year || new Date().getFullYear(),
       status: project.status || "Completed",
       summary: project.summary || ""
@@ -241,6 +243,10 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
           <label>
             Location
             <input name="location" value={draft.location} onChange={updateField} placeholder="Melbourne, VIC" required />
+          </label>
+          <label>
+            Area
+            <input name="area" value={draft.area} onChange={updateField} placeholder="325.48 sqm" />
           </label>
           <label>
             Year

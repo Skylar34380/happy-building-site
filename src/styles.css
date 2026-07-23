@@ -21,10 +21,12 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body-font);
@@ -223,6 +225,14 @@ button:disabled {
   color: #244859;
   font-size: 14px;
   font-weight: 800;
+}
+
+.menu-button {
+  display: none;
+}
+
+.section[id] {
+  scroll-margin-top: 92px;
 }
 
 .hero {
@@ -1544,14 +1554,11 @@ textarea {
 
 @media (max-width: 940px) {
   .site-header {
-    align-items: flex-start;
-    flex-direction: column;
+    gap: 14px;
   }
 
   .site-nav {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    gap: 16px;
   }
 
   .section-heading.split,
@@ -1593,8 +1600,135 @@ textarea {
 }
 
 @media (max-width: 640px) {
+  .site-header {
+    min-height: 64px;
+    padding: 9px 18px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand strong {
+    font-size: 14px;
+  }
+
+  .brand small {
+    font-size: 10px;
+  }
+
+  .menu-button {
+    position: relative;
+    z-index: 22;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    place-content: center;
+    gap: 5px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .menu-button span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .menu-button.is-open span:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-button.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-button.is-open span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: grid;
+    max-height: 0;
+    gap: 0;
+    overflow: hidden;
+    padding: 0 18px;
+    background: rgba(232, 241, 244, 0.98);
+    border-bottom: 1px solid transparent;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    visibility: hidden;
+    transition:
+      max-height 260ms ease,
+      opacity 180ms ease,
+      transform 220ms ease,
+      padding 220ms ease;
+  }
+
+  .site-nav.is-open {
+    max-height: 380px;
+    padding-top: 8px;
+    padding-bottom: 14px;
+    border-bottom-color: rgba(8, 34, 50, 0.12);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .site-nav a {
+    min-height: 46px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(8, 34, 50, 0.08);
+  }
+
+  .site-nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .admin-header .site-nav {
+    position: static;
+    display: flex;
+    width: auto;
+    max-height: none;
+    margin-left: auto;
+    gap: 14px;
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    visibility: visible;
+  }
+
+  .admin-header .site-nav a,
+  .admin-header .nav-button {
+    min-height: 44px;
+    padding: 11px 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
   .hero {
-    min-height: 650px;
+    min-height: max(640px, calc(100svh - 64px));
   }
 
   .hero::after {
@@ -1602,10 +1736,58 @@ textarea {
   }
 
   .architectural-scene {
-    inset: 8% -38% auto auto;
-    width: 105vw;
-    height: 32%;
-    opacity: 0.26;
+    inset: 2% -34% auto auto;
+    width: 112vw;
+    height: 38%;
+    opacity: 0.34;
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: 52px 18px 38px;
+  }
+
+  h1 {
+    max-width: 13ch;
+    margin-bottom: 16px;
+    font-size: 44px;
+    line-height: 0.98;
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 1.04;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .hero-content p:not(.eyebrow) {
+    margin-bottom: 22px;
+    font-size: 17px;
+  }
+
+  .section {
+    padding: 58px 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .scroll-story-section {
+    min-height: 560px;
+    padding: 72px 18px;
+  }
+
+  .scroll-story-line {
+    font-size: 48px;
+    line-height: 0.98;
+  }
+
+  .scroll-story-copy {
+    margin-left: 0;
   }
 
   .team-grid,
@@ -1630,9 +1812,18 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .project-grid,
+  .project-grid {
+    grid-auto-columns: 92%;
+    gap: 14px;
+    scrollbar-width: none;
+  }
+
+  .project-grid::-webkit-scrollbar {
+    display: none;
+  }
+
   .admin-project-strip {
-    grid-auto-columns: 100%;
+    grid-auto-columns: 88%;
   }
 
   .plan-board,
@@ -1642,7 +1833,12 @@ textarea {
 
   .room-three-scene,
   .room-scene-fallback {
-    min-height: 310px;
+    min-height: 280px;
+  }
+
+  .plan-board,
+  .room-preview {
+    min-height: 390px;
   }
 
   .database-form .wide,
@@ -1655,9 +1851,111 @@ textarea {
     gap: 10px;
   }
 
+  .service-list h3,
+  .preview-copy h3,
+  .what-grid h3 {
+    font-size: 34px;
+  }
+
+  .what-grid article {
+    min-height: 250px;
+    padding: 24px;
+  }
+
+  .contact-form,
+  .database-preview {
+    padding: 18px;
+  }
+
   .contact-section dl div,
   .site-footer {
     grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .contact-section dd,
+  .site-footer {
+    overflow-wrap: anywhere;
+  }
+
+  input,
+  select,
+  textarea {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .button {
+    min-height: 48px;
+  }
+
+  .gallery-arrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .gallery-dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .project-meta {
+    gap: 6px;
+  }
+
+  .project-meta span {
+    min-height: 26px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .admin-project-list {
+    max-height: none;
+  }
+
+  .media-actions button,
+  .admin-record-actions button {
+    min-height: 40px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 33px;
+  }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .action-row .button {
+    width: 100%;
+  }
+
+  .team-grid,
+  .media-grid,
+  .upload-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .database-form {
+    padding: 16px;
+  }
+
+  .admin-header .brand span {
+    display: none;
+  }
+
+  .admin-heading-actions,
+  .media-manager-heading,
+  .admin-form-heading {
+    align-items: stretch;
     flex-direction: column;
   }
 }

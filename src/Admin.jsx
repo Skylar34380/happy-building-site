@@ -49,7 +49,7 @@ export default function Admin() {
 
   return (
     <>
-      <header className="site-header">
+      <header className="site-header admin-header">
         <a className="brand" href="/" aria-label="2Form Consulting Pty Ltd home">
           <img className="brand-logo" src="/assets/2form-logo.jpg" alt="" />
           <span>

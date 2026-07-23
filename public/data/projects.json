@@ -1,13 +1,14 @@
 [
   {
     "id": "2a-webster-street-residential-infill",
-    "title": "2A Webster Street",
+    "title": "Compact House, Complete Living",
     "category": "Residential",
-    "location": "2A Webster Street, VIC",
+    "location": "2A Webster, Seddon",
     "year": 2026,
     "status": "Completed",
-    "service": "Residential infill",
-    "summary": "A compact residential infill project shaped around site efficiency, planning clarity, and a carefully resolved street presence.",
+    "service": "Residential Infill",
+    "area": "93.10 sqm",
+    "summary": "At just over 93 square metres, this Seddon infill sets out to prove that a small footprint need not mean a small life. Through a carefully considered architectural response, the dwelling delivers the functionality, flexibility, and amenity of a larger family home while maintaining a restrained building footprint. The design prioritizes spatial efficiency, natural light, and volumetric generosity, resulting in a residence that feels both expansive and intimately connected to its site.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/2a-webster-street-residential-infill/cover-image-01.jpg",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/2a-webster-street-residential-infill/cover-image-01.jpg",
@@ -17,13 +18,14 @@
   },
   {
     "id": "5-bellairs-avenue-multi-residential-development",
-    "title": "5 Bellairs Avenue",
+    "title": "Urban Pulse",
     "category": "Residential",
-    "location": "5 Bellairs Avenue, VIC",
+    "location": "5 Bellairs",
     "year": 2026,
     "status": "Completed",
-    "service": "Multi-residential development",
-    "summary": "A multi-residential development balancing density, amenity, access, and durable architectural expression.",
+    "service": "Multi Townhouse Development",
+    "area": "559.50 sqm",
+    "summary": "Running alongside one of Melbourne's active rail corridors, this townhouse development takes its energy directly from its setting rather than shielding itself from it. Where a quieter suburban site might call for a more introspective architecture, here the constant presence of movement, trains, pedestrians, the shifting rhythm of daily commuting, becomes a legitimate design driver in its own right. 2Form Consulting's design approach establishes a strong visual and spatial connection between the public streetscape and the private life of the dwelling. The architecture celebrates movement as a defining design driver, translating into composition that animates the building and contributes to the evolving urban landscape.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/5-bellairs-avenue-multi-residential-development/cover-image-01.jpg",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/5-bellairs-avenue-multi-residential-development/cover-image-01.jpg",
@@ -33,13 +35,14 @@
   },
   {
     "id": "24-parson-street-townhouse",
-    "title": "24 Parson Street",
+    "title": "The Crafted Edge",
     "category": "Residential",
-    "location": "24 Parson Street, VIC",
+    "location": "24 Parson, Kensington",
     "year": 2026,
     "status": "Completed",
-    "service": "Townhouse",
-    "summary": "A townhouse project focused on efficient planning, private outdoor space, and a refined residential scale.",
+    "service": "Multi Townhouse Development",
+    "area": "325.48 sqm",
+    "summary": "325.48 square metres of site forced the hand of this Kensington development toward verticality almost as a matter of necessity. Where horizontal expansion simply wasn't available, stacking a sequence of efficient, generously proportioned spaces through the section. This vertical strategy does more than solve a spatial problem, it fundamentally shapes the experience of living within the building, with each level offering a distinct relationship to light, outlook, and privacy as one moves up through the home. Referencing the suburb's heritage vocabulary of masonry terraces, modest cottages, and industrial structures, the material palette is intentionally robust and understated. Rich textures, carefully crafted detailing, and a considered composition of openings create a façade that feels both familiar and contemporary.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/24-parson-street-townhouse/cover-image-01.jpg",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/24-parson-street-townhouse/cover-image-01.jpg",
@@ -52,13 +55,14 @@
   },
   {
     "id": "28-linton-avenue-residential",
-    "title": "28 Linton Avenue",
+    "title": "Framed Luxury",
     "category": "Residential",
-    "location": "28 Linton Avenue, VIC",
+    "location": "28 Linton",
     "year": 2026,
     "status": "Completed",
     "service": "Residential",
-    "summary": "A residential project developed with a clear emphasis on proportion, everyday usability, and careful detailing.",
+    "area": "654 sqm",
+    "summary": "It has the luxury of working at a different scale, and the design capitalises on this freedom through spatial sequencing rather than sheer size alone. The home is organised as a series of proportioned volumes, each carefully calibrated to frame a different relationship to light, landscape, or view. Rather than a single grand gesture, the architecture unfolds gradually, with movement through the home structured as a sequence of discoveries, room by room, threshold by threshold. This sequencing is central to the project's identity. As occupants move through the home, the changing quality of light, the shifting proportions of each space, and the varying degrees of enclosure and openness combine to create a rhythm that feels considered rather than incidental. Material restraint underpins this experience, a disciplined palette that avoids ornament in favour of clarity, allowing proportion, light, and spatial sequencing to carry the architectural narrative.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/28-linton-avenue-residential/cover-image-01.jpg",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/28-linton-avenue-residential/cover-image-01.jpg",
@@ -77,13 +81,14 @@
   },
   {
     "id": "31-gent-street-yarraville-townhouse",
-    "title": "31 Gent Street Yarraville",
+    "title": "Gently Curve",
     "category": "Residential",
-    "location": "31 Gent Street, Yarraville VIC",
+    "location": "31 Gent",
     "year": 2026,
     "status": "Completed",
-    "service": "Townhouse",
-    "summary": "A Yarraville townhouse project designed around urban living, compact circulation, and strong material character.",
+    "service": "Townhouse Development",
+    "area": "236.90 sqm",
+    "summary": "Curved geometry replaces the orthogonal habits of conventional residential planning, a deliberate departure from the rectilinear logic that typically governs townhouse design. Sweeping walls soften transitions between spaces, while a sculptural, curved staircase becomes a genuine centrepiece, an architectural moment in its own right rather than a purely functional element of vertical circulation. This curvature actively shapes how the home is experienced, guiding movement through the plan in a way that feels continuous rather than compartmentalised, and creating moments of discovery as sightlines shift and reveal new spaces around each sweeping wall. Large openings extend this spatial logic outward, establishing a strong and deliberate connection to the adjoining reserve. The integration of panoramic outlooks, fluid circulation, and sculpted forms, the dwelling moves beyond conventional residential planning to create a home defined by movement, openness, and a distinctive architectural identity.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/31-gent-street-yarraville-townhouse/cover-image-01.webp",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/31-gent-street-yarraville-townhouse/cover-image-01.webp",
@@ -101,13 +106,14 @@
   },
   {
     "id": "87-93-elm-park-drive-commercial",
-    "title": "87-93 Elm Park Drive",
+    "title": "Elm Developed",
     "category": "Commercial",
-    "location": "87-93 Elm Park Drive, VIC",
+    "location": "87-93 Elm Park",
     "year": 2026,
     "status": "Completed",
-    "service": "Commercial",
-    "summary": "A commercial project coordinating practical frontage, flexible tenancy needs, and a clean architectural identity.",
+    "service": "Commercial Development",
+    "area": "6,397.10 sqm",
+    "summary": "An irregular 6,397 square metre site presented a significant planning challenge, and Elm Developed's response is one of discipline rather than dramatic gesture. The irregularity of the site geometry could easily have produced an awkward, compromised building form, but instead the design uses this complexity as an opportunity to refine rather than complicate, resulting in a workplace environment built on efficiency and clarity rather than architectural excess. The façade's identity is established through refined detailing and careful proportion rather than complexity for its own sake, a considered composition of solids, openings, and material transitions that achieves visual interest without relying on ornamental gesture. This restraint carries through to the building's massing, which is calibrated to maximise development yield while still presenting a coherent and legible presence within its surrounding context. Internally, the brief prioritises the practical realities of contemporary commercial occupancy: daylight penetration, spatial flexibility, and occupant amenity are treated as core design drivers rather than secondary considerations. The result is a building that balances commercial pragmatism with genuine architectural quality, a considered response to a difficult site that resists the temptation to over-design its way around the constraint.",
     "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/87-93-elm-park-drive-commercial/cover-image-01.jpeg",
     "gallery": [
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/87-93-elm-park-drive-commercial/cover-image-01.jpeg",
@@ -219,9 +225,7 @@
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-07-image-07.jpg",
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-08-image-08.jpg",
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-09-image-09.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-10-image-10.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-11-image-11.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-12-image-12.jpg"
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/115-123-alfred-road-aquatic-and-child-care-centre/gallery-10-image-10.jpg"
     ]
   },
   {
@@ -244,7 +248,11 @@
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-07-image-07.jpg",
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-08-image-08.jpg",
       "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-09-image-09.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-10-image-10.jpg"
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-10-image-10.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-11-image-11.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-12-image-12.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-13-image-13.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/185-leakes-road-commercial-development/gallery-14-image-14.jpg"
     ]
   },
   {
@@ -256,22 +264,14 @@
     "status": "Planning",
     "service": "Heritage extension",
     "summary": "A heritage extension project studying the relationship between existing character, new living spaces, and sensitive contemporary detailing.",
-    "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/cover-image-01.jpg",
+    "image": "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/cover-p01.jpg",
     "gallery": [
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/cover-image-01.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-02-image-02.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-03-image-03.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-04-image-04.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-05-image-05.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-06-image-06.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-07-image-07.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-08-image-08.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-09-image-09.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-10-image-10.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-11-image-11.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-12-image-12.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-13-image-13.jpg",
-      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-14-image-14.jpg"
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/cover-p01.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-02-p02.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-03-p03.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-04-p04.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-05-p05.jpg",
+      "https://twoformmedia2026.blob.core.windows.net/project-media/projects/250-ross-street-heritage-extension/gallery-06-p06.jpg"
     ]
   }
 ]
