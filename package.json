@@ -12,7 +12,12 @@
   },
   "scripts": {
     "add-project": "node scripts/add-project.mjs",
+    "secret": "node scripts/generate-secret.mjs",
+    "sync-project-data": "node scripts/sync-project-data.mjs",
+    "upload-media": "node scripts/upload-project-media.mjs",
     "validate": "node scripts/validate-projects.mjs",
+    "check:api": "node scripts/check-api.mjs",
+    "check": "npm run validate && npm run check:api && npm run build",
     "dev": "vite --host 127.0.0.1 --port 8080",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 8080"

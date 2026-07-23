@@ -5,3 +5,8 @@ dist/
 .env.*
 outputs/
 work/
+mycloud-project-covers/
+mycloud-project-gallery/
+assets/project-covers/
+public/assets/project-covers/
+public/assets/project-gallery/
