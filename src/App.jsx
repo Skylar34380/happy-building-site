@@ -343,8 +343,16 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>2Form Consulting Pty Ltd React structure and placeholder content ready for replacement.</p>
-        <a href="/admin">Staff login</a>
+        <p>2Form Consulting Pty Ltd. Melbourne, Victoria.</p>
+        <div className="footer-links">
+          <span>Copyright {new Date().getFullYear()} 2Form Consulting Pty Ltd.</span>
+          <span aria-hidden="true">/</span>
+          <a href="mailto:info@2form.com.au?subject=Privacy%20enquiry">Privacy</a>
+          <span aria-hidden="true">/</span>
+          <a href="mailto:info@2form.com.au?subject=Terms%20enquiry">Terms</a>
+          <span aria-hidden="true">/</span>
+          <a href="/admin">Staff login</a>
+        </div>
       </footer>
     </>
   );

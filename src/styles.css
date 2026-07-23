@@ -696,6 +696,9 @@ h3 {
 }
 
 .project-body {
+  display: flex;
+  min-height: 230px;
+  flex-direction: column;
   padding-top: 18px;
 }
 
@@ -720,7 +723,32 @@ h3 {
 }
 
 .project-body strong {
+  margin-top: auto;
   color: var(--green);
+}
+
+.project-summary {
+  height: 5.25rem;
+  margin: 0 0 16px;
+  overflow-y: auto;
+  padding-right: 10px;
+  color: var(--muted);
+  scrollbar-color: rgba(45, 99, 120, 0.52) transparent;
+  scrollbar-width: thin;
+}
+
+.project-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project-summary::-webkit-scrollbar {
+  width: 5px;
+}
+
+.project-summary::-webkit-scrollbar-thumb {
+  background: rgba(45, 99, 120, 0.52);
+  border-radius: 999px;
 }
 
 .services-section {
@@ -1537,6 +1565,7 @@ textarea {
 .site-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 18px;
   padding: 24px clamp(18px, 5vw, 64px);
   background: var(--charcoal);
@@ -1547,9 +1576,30 @@ textarea {
   margin: 0;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.44);
+  font-size: 11px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .site-footer a {
   color: white;
   font-weight: 900;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.64);
+  font-weight: 700;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: white;
 }
 
 @media (max-width: 940px) {
@@ -1876,6 +1926,14 @@ textarea {
   .contact-section dd,
   .site-footer {
     overflow-wrap: anywhere;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+
+  .project-body {
+    min-height: 220px;
   }
 
   input,
