@@ -8,16 +8,16 @@ export default async function handler(request, response) {
   }
 
   try {
-    requireAdmin(request);
+    const admin = requireAdmin(request);
     const { id } = request.query;
 
     if (request.method === "DELETE") {
-      sendJson(response, 200, await deleteProject(id));
+      sendJson(response, 200, await deleteProject(id, admin.username));
       return;
     }
 
     const project = normalizeProject(await readJson(request));
-    sendJson(response, 200, await updateProject(id, project));
+    sendJson(response, 200, await updateProject(id, project, admin.username));
   } catch (error) {
     handleError(response, error);
   }

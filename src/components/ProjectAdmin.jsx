@@ -3,6 +3,7 @@ import {
   buildProjectRecord,
   deleteProject,
   downloadProjectDatabase,
+  loadAuditLog,
   mergeProject,
   removeProject,
   saveProject,
@@ -21,7 +22,7 @@ const EMPTY_PROJECT = {
   summary: ""
 };
 
-export default function ProjectAdmin({ adminToken, projects, onProjectsChange }) {
+export default function ProjectAdmin({ adminToken, auditEntries, projects, onAuditChange, onProjectsChange }) {
   const [draft, setDraft] = useState(EMPTY_PROJECT);
   const [editingId, setEditingId] = useState("");
   const [mediaItems, setMediaItems] = useState([]);
@@ -158,6 +159,7 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
         ? await updateProject(editingId, project, adminToken)
         : await saveProject(project, adminToken);
       onProjectsChange(mergeProject(projects, savedProject));
+      await refreshAuditLog();
       clearMedia();
       setDraft(EMPTY_PROJECT);
       setEditingId("");
@@ -184,6 +186,7 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
     try {
       await deleteProject(project.id, adminToken);
       onProjectsChange(removeProject(projects, project.id));
+      await refreshAuditLog();
       if (editingId === project.id) {
         startNewProject();
       }
@@ -199,6 +202,14 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
   function clearMedia() {
     mediaItems.forEach(revokePreview);
     setMediaItems([]);
+  }
+
+  async function refreshAuditLog() {
+    try {
+      onAuditChange(await loadAuditLog(adminToken));
+    } catch {
+      // A project update succeeded even if the activity panel cannot refresh immediately.
+    }
   }
 
   return (
@@ -340,10 +351,40 @@ export default function ProjectAdmin({ adminToken, projects, onProjectsChange })
               </article>
             ))}
           </div>
+          <section className="audit-panel" aria-labelledby="audit-log-heading">
+            <div className="audit-panel-heading">
+              <div>
+                <p className="eyebrow">Audit log</p>
+                <h3 id="audit-log-heading">Recent activity</h3>
+              </div>
+              <span>{auditEntries.length}</span>
+            </div>
+            {auditEntries.length > 0 ? (
+              <ol className="audit-list">
+                {auditEntries.map((entry) => (
+                  <li key={entry.id}>
+                    <p><strong>{entry.actor}</strong> {entry.action} <b>{entry.projectTitle}</b></p>
+                    <time dateTime={entry.occurredAt}>{formatAuditTime(entry.occurredAt)}</time>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="audit-empty">Project publishing, edits and deletions will appear here.</p>
+            )}
+          </section>
         </aside>
       </div>
     </section>
   );
+}
+
+function formatAuditTime(value) {
+  return new Intl.DateTimeFormat("en-AU", {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(new Date(value));
 }
 
 function revokePreview(item) {

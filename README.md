@@ -52,9 +52,12 @@ AZURE_STORAGE_ACCOUNT
 AZURE_STORAGE_CONTAINER
 AZURE_STORAGE_ACCOUNT_KEY
 AZURE_PROJECTS_BLOB_NAME
+AZURE_AUDIT_LOG_BLOB_NAME
 ```
 
 For browser image uploads, Azure Blob Storage CORS must allow `https://www.2form.com.au`, the `PUT` and `OPTIONS` methods, and the headers used by the signed upload request.
+
+Project publishing, edits and deletions are stored as protected audit entries in `data/audit-log.json`. The activity feed is only available through the authenticated `/api/audit-log` endpoint in the staff admin area.
 
 ## CI/CD
 

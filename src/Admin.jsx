@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import ProjectAdmin from "./components/ProjectAdmin.jsx";
-import { clearAdminToken, getAdminToken, loadProjects, loginAdmin } from "./lib/projectStore.js";
+import { clearAdminToken, getAdminToken, loadAuditLog, loadProjects, loginAdmin } from "./lib/projectStore.js";
 
 const STAFF_USERNAME = "happy123";
 const STAFF_PASSWORD = "happy789";
 
 export default function Admin() {
   const [projects, setProjects] = useState([]);
+  const [auditEntries, setAuditEntries] = useState([]);
   const [projectError, setProjectError] = useState("");
   const [adminToken, setAdminToken] = useState(() => getAdminToken());
   const [loginError, setLoginError] = useState("");
@@ -17,6 +18,17 @@ export default function Admin() {
       .then(setProjects)
       .catch((error) => setProjectError(error.message));
   }, []);
+
+  useEffect(() => {
+    if (!adminToken) {
+      setAuditEntries([]);
+      return;
+    }
+
+    loadAuditLog(adminToken)
+      .then(setAuditEntries)
+      .catch((error) => setProjectError(error.message));
+  }, [adminToken]);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -88,7 +100,13 @@ export default function Admin() {
             <p>{projectError}</p>
           </section>
         ) : (
-          <ProjectAdmin adminToken={adminToken} projects={projects} onProjectsChange={setProjects} />
+          <ProjectAdmin
+            adminToken={adminToken}
+            auditEntries={auditEntries}
+            projects={projects}
+            onAuditChange={setAuditEntries}
+            onProjectsChange={setProjects}
+          />
         )}
       </main>
     </>
