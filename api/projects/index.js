@@ -9,9 +9,9 @@ export default async function handler(request, response) {
     }
 
     if (request.method === "POST") {
-      requireAdmin(request);
+      const admin = requireAdmin(request);
       const project = normalizeProject(await readJson(request));
-      sendJson(response, 201, await createProject(project));
+      sendJson(response, 201, await createProject(project, admin.username));
       return;
     }
 

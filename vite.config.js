@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { createUploadTarget } from "./api/_lib/azureBlob.js";
+import { listAuditEntries } from "./api/_lib/auditLog.js";
 import { createToken, requireAdmin } from "./api/_lib/http.js";
 import { createProject, deleteProject, listProjects, updateProject } from "./api/_lib/projectsDb.js";
 
@@ -18,7 +19,8 @@ export default defineConfig(({ mode }) => {
     "AZURE_STORAGE_ACCOUNT",
     "AZURE_STORAGE_ACCOUNT_KEY",
     "AZURE_STORAGE_CONTAINER",
-    "AZURE_PROJECTS_BLOB_NAME"
+    "AZURE_PROJECTS_BLOB_NAME",
+    "AZURE_AUDIT_LOG_BLOB_NAME"
   ].forEach((key) => {
     if (env[key]) {
       process.env[key] = env[key];
@@ -62,22 +64,28 @@ function localAdminApi() {
             return;
           }
 
-          if (request.method === "POST" && url.pathname === "/api/projects") {
+          if (request.method === "GET" && url.pathname === "/api/audit-log") {
             requireAdmin(request);
+            sendJson(response, 200, await listAuditEntries({ limit: url.searchParams.get("limit") }));
+            return;
+          }
+
+          if (request.method === "POST" && url.pathname === "/api/projects") {
+            const admin = requireAdmin(request);
             const project = normalizeProject(await readBodyJson(request));
-            sendJson(response, 201, await createProject(project));
+            sendJson(response, 201, await createProject(project, admin.username));
             return;
           }
 
           const projectMatch = url.pathname.match(/^\/api\/projects\/([^/]+)$/);
           if (projectMatch && ["PUT", "PATCH", "DELETE"].includes(request.method)) {
-            requireAdmin(request);
+            const admin = requireAdmin(request);
             const projectId = decodeURIComponent(projectMatch[1]);
 
             if (request.method === "DELETE") {
-              sendJson(response, 200, await deleteProject(projectId));
+              sendJson(response, 200, await deleteProject(projectId, admin.username));
             } else {
-              sendJson(response, 200, await updateProject(projectId, normalizeProject(await readBodyJson(request))));
+              sendJson(response, 200, await updateProject(projectId, normalizeProject(await readBodyJson(request)), admin.username));
             }
             return;
           }

@@ -1,4 +1,5 @@
 const API_PROJECTS_URL = "/api/projects";
+const API_AUDIT_LOG_URL = "/api/audit-log";
 const FALLBACK_PROJECTS_URL = "/data/projects.json";
 const TOKEN_STORAGE_KEY = "twoform_admin_token";
 
@@ -121,6 +122,20 @@ export async function updateProject(projectId, project, token) {
 export async function deleteProject(projectId, token) {
   const response = await fetch(`${API_PROJECTS_URL}/${encodeURIComponent(projectId)}`, {
     method: "DELETE",
+    headers: {
+      "X-Admin-Token": token
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(await readApiError(response));
+  }
+
+  return response.json();
+}
+
+export async function loadAuditLog(token) {
+  const response = await fetch(`${API_AUDIT_LOG_URL}?limit=25`, {
     headers: {
       "X-Admin-Token": token
     }

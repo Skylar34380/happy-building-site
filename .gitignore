@@ -10,3 +10,4 @@ mycloud-project-gallery/
 assets/project-covers/
 public/assets/project-covers/
 public/assets/project-gallery/
+data/audit-log.local.json

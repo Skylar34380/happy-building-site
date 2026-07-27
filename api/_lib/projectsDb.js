@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { recordAuditEntry } from "./auditLog.js";
 import { getJsonBlob, hasAzureBlobConfig, putJsonBlob } from "./azureBlob.js";
 
 const fallbackPath = new URL("../../public/data/projects.json", import.meta.url);
@@ -23,14 +24,15 @@ export async function listProjects() {
   }
 }
 
-export async function createProject(project) {
+export async function createProject(project, actor) {
   const projects = await listProjects();
   const nextProjects = [project, ...projects.filter((item) => item.id !== project.id)];
   await putJsonBlob(projectsBlobName, nextProjects);
+  await recordAuditEntry({ actor, action: "published", project });
   return project;
 }
 
-export async function updateProject(id, project) {
+export async function updateProject(id, project, actor) {
   const projects = await listProjects();
   const index = projects.findIndex((item) => item.id === id);
 
@@ -46,11 +48,12 @@ export async function updateProject(id, project) {
   const nextProjects = projects.slice();
   nextProjects[index] = updatedProject;
   await putJsonBlob(projectsBlobName, nextProjects);
+  await recordAuditEntry({ actor, action: "updated", project: updatedProject });
 
   return updatedProject;
 }
 
-export async function deleteProject(id) {
+export async function deleteProject(id, actor) {
   const projects = await listProjects();
   const project = projects.find((item) => item.id === id);
 
@@ -62,6 +65,7 @@ export async function deleteProject(id) {
     projectsBlobName,
     projects.filter((item) => item.id !== id)
   );
+  await recordAuditEntry({ actor, action: "deleted", project });
 
   return { id, deleted: true };
 }

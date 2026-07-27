@@ -1,5 +1,6 @@
 import { app } from "@azure/functions";
 import { createUploadTarget } from "../../_lib/azureBlob.js";
+import { listAuditEntries } from "../../_lib/auditLog.js";
 import { createProject, deleteProject, listProjects, updateProject } from "../../_lib/projectsDb.js";
 import { createToken, requireAdmin } from "../../_lib/http.js";
 
@@ -39,9 +40,9 @@ app.http("projects", {
       return json(200, await listProjects());
     }
 
-    requireAdmin(toAuthRequest(request));
+    const admin = requireAdmin(toAuthRequest(request));
     const project = normalizeProject(await request.json());
-    return json(201, await createProject(project));
+    return json(201, await createProject(project, admin.username));
   })
 });
 
@@ -50,14 +51,25 @@ app.http("projectById", {
   methods: ["PUT", "PATCH", "DELETE"],
   authLevel: "anonymous",
   handler: async (request) => withErrorHandling(async () => {
-    requireAdmin(toAuthRequest(request));
+    const admin = requireAdmin(toAuthRequest(request));
 
     if (request.method === "DELETE") {
-      return json(200, await deleteProject(getProjectId(request)));
+      return json(200, await deleteProject(getProjectId(request), admin.username));
     }
 
     const project = normalizeProject(await request.json());
-    return json(200, await updateProject(getProjectId(request), project));
+    return json(200, await updateProject(getProjectId(request), project, admin.username));
+  })
+});
+
+app.http("auditLog", {
+  route: "audit-log",
+  methods: ["GET"],
+  authLevel: "anonymous",
+  handler: async (request) => withErrorHandling(async () => {
+    requireAdmin(toAuthRequest(request));
+    const limit = new URL(request.url).searchParams.get("limit");
+    return json(200, await listAuditEntries({ limit }));
   })
 });
 
