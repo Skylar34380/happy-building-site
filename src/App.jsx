@@ -10,7 +10,7 @@ const RoomPlanningScene = lazy(() => import("./components/RoomPlanningScene.jsx"
 const team = [
   {
     name: "Robert",
-    role: "Founder / Director",
+    role: "Director",
     bio: "Leads the studio vision, client relationships, project direction, and the key decisions that shape each build."
   },
   {
@@ -25,7 +25,7 @@ const team = [
   },
   {
     name: "Steve",
-    role: "Architect",
+    role: "Drafter",
     bio: "Supports project delivery through working drawings, consultant coordination, site review, and design refinement."
   }
 ];
