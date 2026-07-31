@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+bin/
+obj/
+TestResults/
+coverage/
+node_modules/
+dist/
+.DS_Store
+

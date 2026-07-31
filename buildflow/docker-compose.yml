@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-buildflow}
+      POSTGRES_USER: ${POSTGRES_USER:-buildflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-buildflow-dev-password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - buildflow-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__BuildFlow: Host=postgres;Port=5432;Database=${POSTGRES_DB:-buildflow};Username=${POSTGRES_USER:-buildflow};Password=${POSTGRES_PASSWORD:-buildflow-dev-password}
+      Jwt__Key: ${Jwt__Key:-buildflow-local-only-secret-change-before-production}
+      Jwt__Issuer: buildflow-api
+      Jwt__Audience: buildflow-web
+      Cors__Origin: http://localhost:5173
+      AzureStorage__ConnectionString: ${AzureStorage__ConnectionString:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  buildflow-postgres:
+
