@@ -43,6 +43,16 @@ const FEATURED_PROJECT_IDS = {
   Future: "62-64-hook-street-multi-residential-development"
 };
 
+const FEATURED_IMAGE_INDEXES = {
+  Past: 2,
+  Current: 1,
+  Future: 0
+};
+
+const PAST_PROJECT_ORDER = [
+  "28-linton-avenue-residential"
+];
+
 function stageForProject(project) {
   if (CURRENT_PROJECT_IDS.has(project.id)) {
     return "Current";
@@ -55,11 +65,31 @@ function stageForProject(project) {
   return "Past";
 }
 
+function previewProject(project, imageIndex) {
+  const images = [...new Set([project.image, ...(Array.isArray(project.gallery) ? project.gallery : [])].filter(Boolean))];
+  return { ...project, image: images[imageIndex] || images[0], gallery: [] };
+}
+
+function sortProjectsForStage(stageId, stageProjects) {
+  if (stageId !== "Past") {
+    return stageProjects;
+  }
+
+  return [...stageProjects].sort((first, second) => {
+    const firstIndex = PAST_PROJECT_ORDER.indexOf(first.id);
+    const secondIndex = PAST_PROJECT_ORDER.indexOf(second.id);
+    const firstRank = firstIndex === -1 ? Number.MAX_SAFE_INTEGER : firstIndex;
+    const secondRank = secondIndex === -1 ? Number.MAX_SAFE_INTEGER : secondIndex;
+    return firstRank - secondRank;
+  });
+}
+
 export default function Portfolio({ projects }) {
   const [activeStage, setActiveStage] = useState(null);
   const projectsByStage = useMemo(
     () => STAGES.reduce((groups, stage) => {
-      groups[stage.id] = projects.filter((project) => stageForProject(project) === stage.id);
+      const stageProjects = projects.filter((project) => stageForProject(project) === stage.id);
+      groups[stage.id] = sortProjectsForStage(stage.id, stageProjects);
       return groups;
     }, {}),
     [projects]
@@ -71,6 +101,7 @@ export default function Portfolio({ projects }) {
     <section className="section portfolio-section" id="portfolio">
       {selectedStage ? (
         <StageProjectList
+          key={selectedStage.id}
           projects={projectsByStage[selectedStage.id]}
           stage={selectedStage}
           onBack={() => setActiveStage(null)}
@@ -103,28 +134,22 @@ function PortfolioOverview({ projectsByStage, onSelectStage }) {
             return null;
           }
 
+          const preview = previewProject(featured, FEATURED_IMAGE_INDEXES[stage.id]);
+
           return (
             <article className="portfolio-stage" key={stage.id}>
-              <div className="portfolio-stage-heading">
-                <div>
-                  <p className="eyebrow">{stage.eyebrow}</p>
-                  <h3>
-                    <button className="portfolio-stage-title" type="button" onClick={() => onSelectStage(stage.id)}>
-                      {stage.label} <span aria-hidden="true">→</span>
-                    </button>
-                  </h3>
-                </div>
-              </div>
-              <ProjectGallery project={featured} />
-              <div className="project-body portfolio-stage-body">
-                <div className="project-meta">
-                  <span>{featured.category}</span>
-                  <span>{stage.id}</span>
-                  {featured.area && <span>{featured.area}</span>}
-                </div>
-                <h4>{featured.title}</h4>
-                <p className="project-summary" tabIndex="0">{featured.summary}</p>
-                <strong>{featured.location}</strong>
+              <div className="portfolio-stage-visual">
+                <ProjectGallery project={preview} />
+                <button
+                  className="portfolio-stage-link"
+                  type="button"
+                  onClick={() => onSelectStage(stage.id)}
+                  aria-label={`View ${stage.label}`}
+                >
+                  <span className="portfolio-stage-title">
+                    {stage.label} <span aria-hidden="true">→</span>
+                  </span>
+                </button>
               </div>
             </article>
           );
@@ -135,58 +160,81 @@ function PortfolioOverview({ projectsByStage, onSelectStage }) {
 }
 
 function StageProjectList({ projects, stage, onBack, onChangeStage }) {
+  const [selectedProjectId, setSelectedProjectId] = useState(projects[0]?.id);
+  const selectedIndex = Math.max(0, projects.findIndex((project) => project.id === selectedProjectId));
+  const selectedProject = projects[selectedIndex];
+  const previousProject = projects[(selectedIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(selectedIndex + 1) % projects.length];
+
+  if (!selectedProject) {
+    return null;
+  }
+
   return (
-    <>
-      <div className="section-heading split portfolio-list-heading">
-        <div>
-          <p className="eyebrow">{stage.eyebrow}</p>
-          <h2>{stage.heading}</h2>
+    <div className="portfolio-project-layout" aria-live="polite">
+      <aside className="portfolio-project-directory" aria-label={`${stage.label} project directory`}>
+        <button className="portfolio-back-link" type="button" onClick={onBack}>
+          <span aria-hidden="true">←</span> Portfolio
+        </button>
+        <p className="eyebrow">{stage.label}</p>
+        <div className="portfolio-project-links">
+          {projects.map((project) => (
+            <button
+              className={project.id === selectedProject.id ? "portfolio-project-link active" : "portfolio-project-link"}
+              key={project.id}
+              type="button"
+              onClick={() => setSelectedProjectId(project.id)}
+            >
+              {project.title}
+            </button>
+          ))}
         </div>
-        <div className="portfolio-list-actions">
-          <button className="portfolio-back-link" type="button" onClick={onBack}>
-            <span aria-hidden="true">←</span> Portfolio overview
-          </button>
-          <div className="stage-switcher" aria-label="Project stages">
-            {STAGES.map((item) => (
-              <button
-                className={item.id === stage.id ? "stage-switch active" : "stage-switch"}
-                key={item.id}
-                type="button"
-                onClick={() => onChangeStage(item.id)}
-              >
-                {item.id}
-              </button>
-            ))}
+        <div className="stage-switcher" aria-label="Project stages">
+          {STAGES.map((item) => (
+            <button
+              className={item.id === stage.id ? "stage-switch active" : "stage-switch"}
+              key={item.id}
+              type="button"
+              onClick={() => onChangeStage(item.id)}
+            >
+              {item.id}
+            </button>
+          ))}
+        </div>
+      </aside>
+
+      <div className="portfolio-project-content">
+        <div className="portfolio-project-showcase">
+          <div className="portfolio-project-hero">
+            <ProjectGallery project={selectedProject} className="portfolio-project-gallery" />
+          </div>
+
+          <div className="portfolio-project-copy">
+            <div className="portfolio-project-intro">
+              <div className="portfolio-project-tags" aria-label="Project classification">
+                <span>{selectedProject.category}</span>
+              </div>
+              <p className="eyebrow">{selectedProject.location}</p>
+              <h2>{selectedProject.title}</h2>
+            </div>
+            <p className="portfolio-project-summary">{selectedProject.summary}</p>
           </div>
         </div>
-      </div>
 
-      <div className="project-grid" aria-live="polite">
-        {projects.map((project) => <ProjectCard project={project} stage={stage.id} key={project.id} />)}
-      </div>
-    </>
-  );
-}
-
-function ProjectCard({ project, stage }) {
-  return (
-    <article className="project-card">
-      <ProjectGallery project={project} />
-      <div className="project-body">
-        <div className="project-meta">
-          <span>{project.category}</span>
-          <span>{stage}</span>
-          {project.area && <span>{project.area}</span>}
+        <div className="portfolio-project-pagination">
+          <button type="button" onClick={() => setSelectedProjectId(previousProject.id)}>
+            Previous
+          </button>
+          <button type="button" onClick={() => setSelectedProjectId(nextProject.id)}>
+            Next
+          </button>
         </div>
-        <h3>{project.title}</h3>
-        <p className="project-summary" tabIndex="0">{project.summary}</p>
-        <strong>{project.location}</strong>
       </div>
-    </article>
+    </div>
   );
 }
 
-function ProjectGallery({ project }) {
+function ProjectGallery({ project, className = "" }) {
   const images = useMemo(() => {
     const gallery = Array.isArray(project.gallery) ? project.gallery : [];
     return [...new Set([project.image, ...gallery].filter(Boolean))];
@@ -211,7 +259,7 @@ function ProjectGallery({ project }) {
   }
 
   return (
-    <div className="project-gallery">
+    <div className={`project-gallery ${className}`.trim()}>
       <img src={activeImage} alt={`${project.title} project view ${activeIndex + 1}`} />
       {images.length > 1 && (
         <>
