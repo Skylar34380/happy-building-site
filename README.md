@@ -30,6 +30,16 @@ Open `http://127.0.0.1:8080`.
 
 Before testing Azure-backed admin uploads locally, create a `.env` file from `.env.example` and fill in the Azure and admin credentials. Never commit this file.
 
+## Quality checks
+
+Run the same validation used by continuous integration before publishing a website update:
+
+```bash
+npm run check
+```
+
+This validates the portfolio data, checks the serverless API modules and creates a production Vite build.
+
 ## Production content workflow
 
 1. A staff member signs in at `/admin`.
